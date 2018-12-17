@@ -5,13 +5,12 @@ import esriLoader from 'esri-loader';
 import {appconfig} from './assets/config.js';
 
 Vue.config.productionTip = false
-console.log(process.env.NODE_ENV); 
-console.log(process.env.VUE_APP_TITLE);
+console.log(`Node environment: ${process.env.NODE_ENV}`); 
+console.log(`VUE_APP_TITLE from .env: ${process.env.VUE_APP_TITLE}`); 
 esriLoader.loadModules([
   "bootstrap/Dropdown",
   "calcite-maps/calcitemaps-v0.9"], 
-  appconfig.options).then(([])=>{
-    console.log('loaded Moddhules')
+  appconfig.options).then(()=>{
     new Vue({
       render: h => h(App),
     }).$mount('#app')
