@@ -9,28 +9,6 @@
       <component v-bind:is="panel.panelid" v-bind:mapinfo="mapView"></component>
     </panel-template>
 
-<!-- 
-<panel-template v-bind:title="'Bottom'" v-bind:panelid="'bottom-panel'" v-bind:key="7" v-bind:glyphicon="'glyphicon glyphicon-list-alt'">
-  <bottom-panel/>
-  </panel-template>  -->
-
-<div v-show="activePanel==='bottom-panel'">
-      <div id="bottom-panel" class="panel">
-        <div id="headingInfo" class="panel-heading">
-          <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          <span class="panel-label"> About</span>
-          <a style="float:right;" role="button" tabindex="0" v-on:click="activePanel=''">
-            <span class="esri-icon esri-icon-close" aria-hidden="true"></span>
-          </a>
-        </div>
-        <div class="panel-body">
-          <div id='newlegend'></div>
-        </div>
-      </div>
-    </div>
-
-
-
   </div>
 </template>
 
@@ -64,7 +42,8 @@ export default {
       ],
       activePanel:null,
       mapView:null,
-      title: "Esri Webpack Vue Boilerplate2"
+      title: "Esri Webpack Vue Boilerplate",
+      subtitle: "A Vue CLI 3 Starter Template"
       
     }},
     components: {"bottom-panel": BottomPanel, "navbar": Navbar, "panel-template":Panel, "info-panel":InfoPanel, "legend-panel":LegendPanel, 'query-panel':QueryPanel, "esri-map": EsriMap, 'login-panel': LoginPanel}

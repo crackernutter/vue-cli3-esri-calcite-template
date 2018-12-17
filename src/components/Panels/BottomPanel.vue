@@ -1,13 +1,13 @@
 <template>
 <div>
-<p>{{greeting}} World!</p>
+<p>{{greeting}}</p>
 </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      greeting: "Hello"
+      greeting: "Hello Bottom!"
     };
   }
 };

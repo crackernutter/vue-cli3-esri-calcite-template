@@ -20,7 +20,7 @@
       <div class="calcite-title calcite-overflow-hidden">
         <span class="calcite-title-main" v-once>{{$parent.title}}</span>
         <span class="calcite-title-divider hidden-xs"></span>
-        <span class="calcite-title-sub hidden-xs">A Bootstrap theme for building modern map apps</span>
+        <span class="calcite-title-sub hidden-xs">{{$parent.subtitle}}</span>
       </div>
       <!-- Nav -->
       <ul class="nav navbar-nav calcite-nav">
