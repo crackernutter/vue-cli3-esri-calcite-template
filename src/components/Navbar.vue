@@ -11,7 +11,7 @@
           </div>
         </a>
         <ul class="dropdown-menu" role="menu">
-          <navbar-dropdown-link v-for="panel in $parent.panels" @click.native="updatePanel(panel.panelid)" :key="panel.id" :panelid="panel.panelid"
+          <navbar-dropdown-link v-for="(panel, index) in $parent.panels" @click.native="updatePanel(panel.panelid, panel.position)" :key="index+1" :panelid="panel.panelid"
             :name="panel.name" :glyphicon="panel.glyphicon"></navbar-dropdown-link>
         </ul>
       </div>
@@ -40,8 +40,8 @@ export default {
     };
   },
    methods:{
-      updatePanel: function(value){
-        this.$emit('panel-change', value);
+      updatePanel: function(panelid, position){
+        this.$emit('panel-change', panelid, position);
       }
     },
     components:{'navbar-dropdown-link': NavbarDropdownLink}
