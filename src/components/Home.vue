@@ -2,10 +2,10 @@
   <!-- Navbar -->
 
   <div id="Home">
-    <navbar @panel-change="activePanel = $event"></navbar>
+    <navbar @panel-change="handlePanel"></navbar>
     <!-- Map  -->
     <esri-map></esri-map>
-    <panel-template v-for="panel in panels" :title="panel.name" :panelid="panel.panelid" :glyphicon="panel.glyphicon" :key="panel.id">
+    <panel-template v-for="(panel, index) in panels" :title="panel.name" :panelid="panel.panelid" :glyphicon="panel.glyphicon" :key="index+1" :position="panel.position">
       <component v-bind:is="panel.panelid" v-bind:mapinfo="mapView"></component>
     </panel-template>
 
@@ -32,20 +32,39 @@ export default {
   props: {
     msg: String
   },
+   methods:{
+    handlePanel: function(chosenpanel, position){
+        //remove panel with same position
+        this.activePanels = this.activePanels.filter(panel=>panel.position!=position);
+        //get new panel
+        let newPanel = this.panels.filter(panel=>panel.panelid==chosenpanel);
+        this.activePanels.push(newPanel[0])
+      //}
+      
+    }
+  },
   data: function() { return {
       panels:[
-        {id: 1, "panelid": "info-panel", "name": "Info", "glyphicon": "glyphicon glyphicon-info-sign"},
-        {id: 2, "panelid": "legend-panel", "name": "Legend", "glyphicon": "glyphicon glyphicon-list-alt"},
-        {id: 3, "panelid": "query-panel", "name": "Query", "glyphicon": "glyphicon glyphicon-search"},
-        {id: 4, "panelid": "login-panel", "name": "Login", "glyphicon": "glyphicon glyphicon-user"},
-        {id: 5, "panelid": "bottom-panel", "name": "Bottom", "glyphicon": "glyphicon glyphicon-list-alt"}
+        {"panelid": "info-panel", "name": "Info", "glyphicon": "glyphicon glyphicon-info-sign"},
+        {"panelid": "legend-panel", "name": "Legend", "glyphicon": "glyphicon glyphicon-list-alt"},
+        {"panelid": "query-panel", "name": "Query", "glyphicon": "glyphicon glyphicon-search"},
+        {"panelid": "login-panel", "name": "Login", "glyphicon": "glyphicon glyphicon-user"},
+        {"panelid": "bottom-panel", "name": "Bottom", "glyphicon": "glyphicon glyphicon-list-alt", "position":"bottom"}
       ],
-      activePanel:null,
+       activePanels: [],
+      //just used to map intialPanels to active panels so as not to repeat code...
+      initialPanels:['bottom-panel', 'query-panel'],
       mapView:null,
       title: "Esri Webpack Vue Boilerplate",
       subtitle: "A Vue CLI 3 Starter Template"
       
     }},
-    components: {"bottom-panel": BottomPanel, "navbar": Navbar, "panel-template":Panel, "info-panel":InfoPanel, "legend-panel":LegendPanel, 'query-panel':QueryPanel, "esri-map": EsriMap, 'login-panel': LoginPanel}
+    components: {"bottom-panel": BottomPanel, "navbar": Navbar, "panel-template":Panel, "info-panel":InfoPanel, "legend-panel":LegendPanel, 'query-panel':QueryPanel, "esri-map": EsriMap, 'login-panel': LoginPanel},
+    beforeMount: function(){
+      this.activePanels = this.panels.filter((panel)=>{
+        let iPanels = this.initialPanels;
+        return iPanels.includes(panel.panelid);
+      });
+    }
 }
 </script>
